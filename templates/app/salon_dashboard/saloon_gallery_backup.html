@@ -1,0 +1,64 @@
+
+<!DOCTYPE html>
+{% load static %}
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saloon Dashboard</title>
+    <link rel="icon" type="image/x-icon" href="{% static 'app/image/favicon.ico' %}" />
+  
+</head>
+<body class="bg-gray-100">
+    {% include "app/salon_dashboard/header.html" %}
+    
+    <section class="flex flex-col md:flex-row">
+        {% include "app/salon_dashboard/sidebar.html" %}
+     
+        <div class="flex-1 overflow-x-hidden overflow-y-auto bg-gray-200">
+            <div class="main-content p-4 flex-1">
+                <div class="header flex justify-between items-center mb-4">
+                    <h2 class="text-2xl font-bold" style="margin:0 0 0 40px;">Gallery</h2>
+                    <div class="notification flex items-center" style="margin-right:40px;">
+                        <img src="" alt="Notification Icon"
+                            class="w-8 h-8 rounded-full mr-2">
+                        <h3 class="text-base font-bold">Shop Name&nbsp;</h3>
+                        <a href=""><img src="" alt="logout"
+                                class="w-8 h-8 rounded-full mr-2"></a>
+                    </div>
+                </div>
+                <div class="mb-4">
+                    <!-- Add Image Button -->
+                    <button id="addImageBtn"
+                        class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded">
+                        + Add Image
+                    </button>
+                </div>
+
+                <!-- Hidden form for uploading images -->
+                <form id="uploadForm" action="" method="POST" enctype="multipart/form-data"
+                    class="hidden">
+                    <input type="hidden" name="shop_id" value="<?php echo $_SESSION['shop_id']; ?>">
+                    <input type="file" name="image" id="imageInput" accept="image/*" class="hidden"
+                        onchange="this.form.submit()">
+                </form>
+                <div class="grid grid-cols-2 gap-4">
+                            <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+                            <img src="" alt="Shop" class="w-full h-450px object-cover">
+                            </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+<script>
+    // When the add image button is clicked, trigger the file input dialog
+    document.getElementById('addImageBtn').addEventListener('click', function() {
+        document.getElementById('imageInput').click();
+    });
+</script>
+</body>
+
+</html>

@@ -1,0 +1,80 @@
+
+<!DOCTYPE html>
+{% load static %}
+{% load static tailwind_tags %}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Salon Gallery</title>
+    <link rel="icon" type="image/x-icon" href="{% static 'app/image/favicon.ico' %}" />
+    {% tailwind_css %}
+    
+    <style>
+      
+    </style>
+</head>
+
+<body class="bg-gray-100">
+    {% include "app/salon_dashboard/header.html" %}
+    
+    <section class="flex flex-col md:flex-row">
+        {% include "app/salon_dashboard/sidebar.html" %}
+     
+        <div class="flex-1 p-6">
+            <div class="main-content p-4 flex-1">
+                <div class="mb-4">
+                    <!-- Add Image Button -->
+                    <button id="addImageBtn"
+                        class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded">
+                        + Add Image
+                    </button>
+                </div>
+
+                <!-- Hidden form for uploading images -->
+                <form id="uploadForm" method="POST" enctype="multipart/form-data"
+                    class="hidden">
+                    {% csrf_token %}
+                    <input type="hidden" name="shop_id" value="{% if user.is_authenticated %}{{ user }}{% endif %}">
+                    <input type="file" name="image" id="imageInput" accept="image/*" class="hidden"
+                        onchange="this.form.submit()">
+                </form>
+ 
+                <div class="grid grid-cols-2 gap-4">
+   
+                    {%for img in image%}
+                    <div class="bg-white rounded-lg shadow-lg overflow-hidden relative">
+                        <img src="{{ BASE_DIR }}.{{ img.image.url }}" alt="Shop" class="w-full h-450px object-cover">
+                        
+                        <form action="" method="POST" style="position: absolute; top: 10px; right: 10px;">
+                            {% csrf_token %}
+                            <input type="hidden" name="img_id" value="{{ img.id }}">
+                            <button type="submit" name="delete_image" class="bg-red-500 hover:bg-red-600 text-white font-bold py-1 px-2 rounded">
+                                Delete
+                            </button>
+                        </form>
+               
+                    </div>
+                    {%endfor%}
+               </div>
+       
+            </div>
+        </div>
+    </section>
+
+            
+    {% if message == 'success' %}
+        <script>
+            alert("You successfully uploaded an image.");
+        </script>
+        {% endif %}
+        <script>
+    
+    document.getElementById('addImageBtn').addEventListener('click', function() {
+        document.getElementById('imageInput').click();
+    });
+   </script>
+</body>
+
+</html>

@@ -1,0 +1,36 @@
+
+<!DOCTYPE html>
+{% load static %}
+{% load static tailwind_tags %}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saloon Dashboard</title>
+    <link rel="icon" type="image/x-icon" href="{% static 'app/image/favicon.ico' %}" />
+    {% tailwind_css %}
+</head>
+
+<body class="bg-gray-100">
+    {% include "app/salon_dashboard/header.html" %}
+    
+    <section class="flex flex-col md:flex-row">
+        {% include "app/salon_dashboard/sidebar.html" %}
+     
+        <div class="flex-1 overflow-x-hidden overflow-y-auto bg-gray-200">
+            <div class="main-content p-4 flex-1">
+                <div class="header flex justify-between items-center mb-4">
+                    <h2 class="text-2xl font-bold" style="margin:0 0 0 40px;">Gallery</h2>
+                    <div class="notification flex items-center" style="margin-right:40px;">
+                        <img src="1-change1.jpg" alt="Notification Icon" class="w-8 h-8 rounded-full mr-2">
+                        <span class="text-gray-500 mr-2">Enterprise</span>
+                        <h3 class="text-base font-bold">Bombshell Studio</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+
+</html>

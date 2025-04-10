@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+{% load static %}
+{% load static tailwind_tags %}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Basic Update</title>
+    <link rel="icon" type="image/x-icon" href="{% static 'app/image/favicon.ico' %}" />
+    {% tailwind_css %}
+    
+</head>
+
+<body class="bg-gray-100">
+    {% include "app/salon_dashboard/header.html" %}
+    
+    <section class="flex flex-col md:flex-row">
+        {% include "app/salon_dashboard/sidebar.html" %}
+     
+        <div class="flex-1 overflow-x-hidden overflow-y-auto bg-gray-200">
+            <div class="main-content p-4 flex-1">
+                <div class="flex justify-center items-center min-h-screen">
+                    <form action="" method="POST" class="bg-white p-6 rounded-lg shadow-md">
+                        <div class="mb-4">
+                            <label for="shop_name" class="block text-sm font-medium">Shop Name:</label>
+                            <input type="text" name="shop_name" id="shop_name"
+                                value="" required
+                                class="border border-gray-300 p-2 w-full">
+                        </div>
+                        <div class="mb-4">
+                            <label for="shop_title" class="block text-sm font-medium">Shop Title:</label>
+                            <input type="text" name="shop_title" id="shop_title"
+                                value="" required
+                                class="border border-gray-300 p-2 w-full">
+                        </div>
+                        <div class="mb-4">
+                            <label for="shop_info" class="block text-sm font-medium">Shop Info:</label>
+                            <textarea name="shop_info" id="shop_info" rows="3"
+                                class="border border-gray-300 p-2 w-full"></textarea>
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="shop_email" class="block text-sm font-medium">Email:</label>
+                            <input type="email" name="shop_email" id="shop_email"
+                                value="" required
+                                class="border border-gray-300 p-2 w-full">
+                        </div>
+                        <div class="mb-4">
+                            <label for="mobile_number" class="block text-sm font-medium">Mobile Number:</label>
+                            <input type="text" name="mobile_number" id="mobile_number"
+                                value="" required
+                                class="border border-gray-300 p-2 w-full">
+                        </div>
+                        <div class="mb-4">
+                            <label for="shop_state" class="block text-sm font-medium">State:</label>
+                            <input type="text" name="shop_state" id="shop_state"
+                                value="" required
+                                class="border border-gray-300 p-2 w-full">
+                        </div>
+                        <div class="mb-4">
+                            <label for="shop_city" class="block text-sm font-medium">City:</label>
+                            <input type="text" name="shop_city" id="shop_city"
+                                value="" required
+                                class="border border-gray-300 p-2 w-full">
+                        </div>
+                        <div class="mb-4">
+                            <label for="shop_area" class="block text-sm font-medium">Area:</label>
+                            <input type="text" name="shop_area" id="shop_area"
+                                value="" required
+                                class="border border-gray-300 p-2 w-full">
+                        </div>
+                        <div class="mb-4">
+                            <label for="landmarks" class="block text-gray-700 font-bold mb-2">Landmark Addresses (At
+                                least 3 required)
+                                *</label>
+                            <input type="text" id="landmark1" name="landmark_1"
+                                class="border border-gray-300 p-2 rounded-lg w-full focus:outline-none focus:border-pink-600 mb-2"
+                                value="" required />
+                            <input type="text" id="landmark2" name="landmark_2"
+                                class="border border-gray-300 p-2 rounded-lg w-full focus:outline-none focus:border-pink-600 mb-2"
+                                value="" required />
+                            <input type="text" id="landmark3" name="landmark_3"
+                                class="border border-gray-300 p-2 rounded-lg w-full focus:outline-none focus:border-pink-600 mb-2"
+                                value="" required />
+                            <input type="text" id="landmark4" name="landmark_4"
+                                class="border border-gray-300 p-2 rounded-lg w-full focus:outline-none focus:border-pink-600 mb-2"
+                                value="" />
+                            <input type="text" id="landmark5" name="landmark_5"
+                                class="border border-gray-300 p-2 rounded-lg w-full focus:outline-none focus:border-pink-600 mb-2"
+                                value="" />
+                        </div>
+                        <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-lg">Update Shop</button>
+                    </form>
+
+
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+
+</html>

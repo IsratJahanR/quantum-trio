@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+{% load static %}
+{% load tailwind_tags %}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Business Account</title>
+    <link rel="icon" type="image/x-icon" href="{% static 'app/image/favicon.ico' %}" />
+    {% tailwind_css %}
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const form = document.getElementById('registrationForm');
+            const passwordField = document.getElementById('password');
+            const passwordError = document.getElementById('passwordError');
+
+            form.addEventListener('submit', function (event) {
+                if (!validatePassword(passwordField.value)) {
+                    event.preventDefault();  // Prevent form submission if validation fails
+                    passwordError.textContent = "Password must be at least 6 characters long.";
+                } else {
+                    passwordError.textContent = "";
+                }
+            });
+
+            function validatePassword(password) {
+                return password.length >= 6;
+            }
+        });
+    </script>
+</head>
+
+<body class="bg-gray-100 flex items-center justify-center min-h-screen px-6 py-10">
+    <div class="bg-white p-10 rounded-2xl shadow-lg max-w-lg m-6">
+        <!-- Header -->
+        <div class="flex justify-between items-center mb-6">
+            <a href="../">
+                <img src="{% static 'app/image/icon/left-arrow.png' %}" alt="Back" class="w-8 h-8">
+            </a>
+            <h2 class="text-2xl font-bold text-gray-700">Create Your Business Account</h2>
+            <div></div>
+        </div>
+
+        <div class="text-center mb-6">
+            <h3 class="text-lg font-semibold text-gray-600">Owner Details Only*</h3>
+        </div>
+
+        <!-- Form -->
+        <form id="registrationForm" action="step2" method="POST">
+            {% csrf_token %}
+            
+            <!-- First Name -->
+            <div class="mb-5">
+                <label for="first-name" class="block text-gray-700 font-medium mb-2">First Name *</label>
+                <input type="text" id="first-name" name="first-name" value=""
+                    class="border border-gray-300 px-4 py-3 rounded-lg w-full focus:outline-none focus:border-pink-600"
+                    required>
+            </div>
+
+            <!-- Last Name -->
+            <div class="mb-5">
+                <label for="last-name" class="block text-gray-700 font-medium mb-2">Last Name *</label>
+                <input type="text" id="last-name" name="last-name" value=""
+                    class="border border-gray-300 px-4 py-3 rounded-lg w-full focus:outline-none focus:border-pink-600"
+                    required>
+            </div>
+
+            <!-- Email -->
+            <div class="mb-5">
+                <label for="email" class="block text-gray-700 font-medium mb-2">Email *</label>
+                <input type="email" id="email" name="email" value=""
+                    class="border border-gray-300 px-4 py-3 rounded-lg w-full focus:outline-none focus:border-pink-600"
+                    required>
+                <p class="text-red-600 text-sm mt-1">{{ message }}</p>
+            </div>
+
+            <!-- Password -->
+            <div class="mb-5">
+                <label for="password" class="block text-gray-700 font-medium mb-2">Password *</label>
+                <input type="password" id="password" name="password" value=""
+                    class="border border-gray-300 px-4 py-3 rounded-lg w-full focus:outline-none focus:border-pink-600"
+                    required minlength="6">
+                <p id="passwordError" class="text-red-600 text-sm mt-1"></p>
+            </div>
+
+            <!-- Mobile Number -->
+            <div class="mb-5">
+                <label for="mobile-number" class="block text-gray-700 font-medium mb-2">Mobile Number *</label>
+                <div class="flex">
+                    <select id="country-code" name="country-code"
+                        class="border border-gray-300 px-4 py-3 rounded-l-lg focus:outline-none focus:border-pink-600">
+                        <option value="+880">+880</option>
+                    </select>
+                    <input type="tel" id="mobile-number" name="mobile-number" value=""
+                        class="border border-gray-300 px-4 py-3 rounded-r-lg w-full focus:outline-none focus:border-pink-600"
+                        required>
+                </div>
+            </div>
+
+            <!-- Country -->
+            <div class="mb-5">
+                <label for="country" class="block text-gray-700 font-medium mb-2">Country *</label>
+                <input type="text" id="country" name="country" value="Bangladesh" readonly
+                    class="border border-gray-300 px-4 py-3 rounded-lg w-full bg-gray-100 focus:outline-none"
+                    required>
+            </div>
+
+            <!-- Terms and Conditions -->
+            <div class="flex items-center mb-6">
+                <input type="checkbox" id="terms" name="terms"
+                    class="text-pink-600 focus:ring-pink-500 h-5 w-5" required>
+                <label for="terms" class="ml-3 text-gray-700 text-sm">
+                    I agree to the <a href="#" class="text-pink-600 hover:underline">Privacy Policy</a> and 
+                    <a href="#" class="text-pink-600 hover:underline">Terms of Business</a>.
+                </label>
+            </div>
+
+            <!-- Submit Button -->
+            <button type="submit"
+                class="bg-pink-500 text-white px-6 py-3 w-full rounded-lg font-medium hover:bg-pink-700 transition duration-300">
+                Continue
+            </button>
+        </form>
+    </div>
+</body>
+
+</html>

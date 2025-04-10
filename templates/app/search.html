@@ -1,30 +1,49 @@
 <!DOCTYPE html>
+{% load static %}
+{% load static tailwind_tags %}
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Search results</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="css/search.css" />
     
+    <title>Search results</title>
+    <link rel="icon" type="image/x-icon" href="{% static 'app/image/favicon.ico' %}" />
+    <meta charset="UTF-8">
+	  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+	  {% tailwind_css %}
+    
+    <style>
+      #imagesize:hover {
+        overflow: hidden;
+        border-radius: 8px;
+        transition: transform 0.3s ease;
+        transform: scale(1.1);
+      }
+    
+      .sha {
+        box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px,
+          rgba(0, 0, 0, 0.23) 0px 3px 6px;
+      }
+      .cards {
+        border: 2px solid #ccc;
+      }
+  </style>
   </head>
 
   <body class="bg-gray-100">
-   <!-- Header -->
+   
    {% include "app/navbar.html" %}
-    <!-- empty space creation -->
+    
     <section class="py-6 bg-gray-100">
       <div>&nbsp;</div>
-      <!-- <div>&nbsp;</div> -->
+  
     </section>
-    <!-- Featured Salons and Parlours -->
+   
     <h2 class="text-3xl font-bold text-center text-gray-800 mb-8">
       Search results 
     </h2>
 
     <section class="py-12">
       <div class="container mx-auto px-4">
-        <!-- <h2 class="text-2xl font-bold mb-4">Recommended</h2>-->
         <h2 class="text-3xl font-bold text-left text-gray-800 mb-8">
           Salons and Parlours
         </h2>
@@ -39,7 +58,29 @@
             >
               <img
                 id="imagesize"
-                src="image/shop/1.jpg"
+                src="{% static 'app/image/shop/1.jpg' %}"
+                alt=""
+                class="w-full h-48 object-cover"
+              />
+              <div class="p-4">
+                <h3 class="text-lg font-semibold">Title</h3>
+                <p class="mt-2 text-sm text-gray-600">
+                  <span class="font-bold text-yellow-500"
+                    >Rating: 3.5 &#9733;</span
+                  >
+                  review:10
+                </p>
+                <p class="mt-2 text-sm text-gray-600">Dhaka,Notun Bazar</p>
+                <p class="mt-2 text-sm text-gray-600">Premium</p>
+              </div>
+            </a>
+            <a
+              href=""
+              class="block bg-white rounded-lg shadow-lg overflow-hidden min-w-[300px] max-w-[300px] flex-none cards"
+            >
+              <img
+                id="imagesize "
+                src="{% static 'app/image/shop/2.jpg' %}"
                 alt=""
                 class="w-full h-48 object-cover"
               />
@@ -61,7 +102,7 @@
             >
               <img
                 id="imagesize"
-                src="image/shop/1.jpg"
+                src="{% static 'app/image/shop/3.avif' %}"
                 alt=""
                 class="w-full h-48 object-cover"
               />
@@ -83,29 +124,7 @@
             >
               <img
                 id="imagesize"
-                src="image/shop/1.jpg"
-                alt=""
-                class="w-full h-48 object-cover"
-              />
-              <div class="p-4">
-                <h3 class="text-lg font-semibold">Title</h3>
-                <p class="mt-2 text-sm text-gray-600">
-                  <span class="font-bold text-yellow-500"
-                    >Rating: 3.5 &#9733;</span
-                  >
-                  review:10
-                </p>
-                <p class="mt-2 text-sm text-gray-600">Dhaka,Notun Bazar</p>
-                <p class="mt-2 text-sm text-gray-600">Premium</p>
-              </div>
-            </a>
-            <a
-              href=""
-              class="block bg-white rounded-lg shadow-lg overflow-hidden min-w-[300px] max-w-[300px] flex-none cards"
-            >
-              <img
-                id="imagesize"
-                src="image/shop/2.jpg"
+                src="{% static 'app/image/shop/4.jpg' %}"
                 alt=""
                 class="w-full h-48 object-cover"
               />
@@ -127,7 +146,7 @@
             >
               <img
                 id="imagesize"
-                src="image/shop/1.jpg"
+                src="{% static 'app/image/shop/5.webp' %}"
                 alt=""
                 class="w-full h-48 object-cover"
               />
@@ -145,42 +164,44 @@
             </a>
           </div>
 
-          <div
-            class="absolute inset-y-0 left-0 flex items-center"
-            id="leftBtn-1"
-          >
-            <div
+          <!-- Left Arrow -->
+          <div class="absolute inset-y-0 left-0 flex items-center" id="leftBtn-1">
+            <button
               class="scroll-arrow left-arrow bg-white p-2 rounded-full shadow-md cursor-pointer"
               onclick="scrollCarousel('carousel-1', -300)"
+              onkeydown="if (event.key === 'Enter' || event.key === ' ') { scrollCarousel('carousel-1', -300); event.preventDefault(); }"
+              aria-label="Scroll left"
             >
               <img
-                src="image/icon/left-arrow1.png"
-                alt=""
+                src="{% static 'app/image/icon/left-arrow1.png' %}"
+                alt="Scroll left"
                 class="w-8 h-8 opacity-100"
               />
-            </div>
+            </button>
           </div>
-          <div
-            class="absolute inset-y-0 right-0 flex items-center"
-            id="rightBtn-1"
-          >
-            <div
+
+          <!-- Right Arrow -->
+          <div class="absolute inset-y-0 right-0 flex items-center" id="rightBtn-1">
+            <button
               class="scroll-arrow right-arrow bg-white p-2 rounded-full shadow-md cursor-pointer"
               onclick="scrollCarousel('carousel-1', 300)"
+              onkeydown="if (event.key === 'Enter' || event.key === ' ') { scrollCarousel('carousel-1', 300); event.preventDefault(); }"
+              aria-label="Scroll right"
             >
               <img
-                src="image/icon/right-arrow.png"
-                alt=""
+                src="{% static 'app/image/icon/right-arrow.png' %}"
+                alt="Scroll right"
                 class="w-8 h-8 opacity-100"
               />
-            </div>
+            </button>
           </div>
+
         </div>
       </div>
     </section>
     <section class="py-12">
       <div class="container mx-auto px-4">
-        <!-- Sorting Dropdown -->
+        
         <div class="flex items-center mb-8">
           <label for="sort" class="mr-4 text-gray-800 font-semibold"
             >Sort by:</label
@@ -192,8 +213,7 @@
           >
             <option value="rating-asc">Rating: Low to High</option>
             <option value="rating-desc">Rating: High to Low</option>
-            <!-- <option value="reviews-asc">Reviews: Low to High</option>
-                    <option value="reviews-desc">Reviews: High to Low</option> -->
+        
           </select>
         </div>
 
@@ -210,7 +230,7 @@
               class="recommendation-item block bg-white rounded-lg shadow-lg overflow-hidden min-w-[300px] max-w-[300px] flex-none"
             >
               <img id="imagesize"
-                src="image/shop/1.jpg"
+                src="{% static 'app/image/shop/2.jpg' %}"
                 alt=""
                 class="w-full h-48 object-cover"
               />
@@ -232,7 +252,7 @@
             >
               <img
                 id="imagesize"
-                src="image/shop/1.jpg"
+                src="{% static 'app/image/shop/1.jpg' %}"
                 alt=""
                 class="w-full h-48 object-cover"
               />
@@ -254,7 +274,7 @@
             >
               <img
                 id="imagesize"
-                src="image/shop/2.jpg"
+                src="{% static 'app/image/shop/3.avif' %}"
                 alt=""
                 class="w-full h-48 object-cover"
               />
@@ -276,7 +296,7 @@
             >
               <img
                 id="imagesize"
-                src="image/shop/2.jpg"
+                src="{% static 'app/image/shop/4.jpg' %}"
                 alt=""
                 class="w-full h-48 object-cover"
               />
@@ -293,36 +313,36 @@
               </div>
             </a>
           </div>
-          <div
-            class="absolute inset-y-0 left-0 flex items-center"
-            id="leftBtn-2"
-          >
-            <div
-              class="scroll-arrow left-arrow bg-white p-2 rounded-full shadow-md cursor-pointer"
-              onclick="scrollCarousel('carousel-2', -300)"
-            >
-              <img
-                src="image/icon/left-arrow1.png"
-                alt=""
-                class="w-8 h-8 opacity-100"
-              />
+          <!-- Left Arrow -->
+            <div class="absolute inset-y-0 left-0 flex items-center" id="leftBtn-2">
+              <button
+                class="scroll-arrow left-arrow bg-white p-2 rounded-full shadow-md cursor-pointer"
+                onclick="scrollCarousel('carousel-2', -300)"
+                aria-label="Scroll left"
+              >
+                <img
+                  src="{% static 'app/image/icon/left-arrow1.png' %}"
+                  alt="Scroll left"
+                  class="w-8 h-8 opacity-100"
+                />
+              </button>
             </div>
-          </div>
-          <div
-            class="absolute inset-y-0 right-0 flex items-center"
-            id="rightBtn-2"
-          >
-            <div
-              class="scroll-arrow right-arrow bg-white p-2 rounded-full shadow-md cursor-pointer"
-              onclick="scrollCarousel('carousel-2', 300)"
-            >
-              <img
-                src="image/icon/right-arrow.png"
-                alt=""
-                class="w-8 h-8 opacity-100"
-              />
+
+            <!-- Right Arrow -->
+            <div class="absolute inset-y-0 right-0 flex items-center" id="rightBtn-2">
+              <button
+                class="scroll-arrow right-arrow bg-white p-2 rounded-full shadow-md cursor-pointer"
+                onclick="scrollCarousel('carousel-2', 300)"
+                aria-label="Scroll right"
+              >
+                <img
+                  src="{% static 'app/image/icon/right-arrow.png' %}"
+                  alt="Scroll right"
+                  class="w-8 h-8 opacity-100"
+                />
+              </button>
             </div>
-          </div>
+
         </div>
       </div>
     </section>
@@ -366,22 +386,17 @@
 
     <section class="py-12">
       <div class="container mx-auto px-4">
-        <!-- <h2 class="text-2xl font-bold mb-4">Recommended</h2>-->
+        
         <h2 class="text-3xl font-bold text-left text-gray-800 mb-8">
           Based on provided services
         </h2>
         <div class="relative">
-          <div
-            id="carousel-3"
-            class="carousel flex space-x-4 overflow-x-auto scroll-smooth"
-          >
-            <a
-              href=""
-              class="block bg-white rounded-lg shadow-lg overflow-hidden min-w-[300px] max-w-[300px] flex-none"
+          <div id="carousel-3" class="carousel flex space-x-4 overflow-x-auto scroll-smooth">
+            <a href="" class="block bg-white rounded-lg shadow-lg overflow-hidden min-w-[300px] max-w-[300px] flex-none"
             >
               <img
                 id="imagesize"
-                src="image/shop/2.jpg"
+                src="{% static 'app/image/shop/5.webp' %}"
                 alt=""
                 class="w-full h-48 object-cover"
               />
@@ -403,7 +418,7 @@
             >
               <img
                 id="imagesize"
-                src="image/shop/2.jpg"
+                src="{% static 'app/image/shop/4.jpg' %}"
                 alt=""
                 class="w-full h-48 object-cover"
               />
@@ -425,7 +440,7 @@
             >
               <img
                 id="imagesize"
-                src="image/shop/2.jpg"
+                src="{% static 'app/image/shop/1.jpg' %}"
                 alt=""
                 class="w-full h-48 object-cover"
               />
@@ -447,7 +462,7 @@
             >
               <img
                 id="imagesize"
-                src="image/shop/2.jpg"
+                src="{% static 'app/image/shop/4.jpg' %}"
                 alt=""
                 class="w-full h-48 object-cover"
               />
@@ -469,7 +484,7 @@
             >
               <img
                 id="imagesize"
-                src="image/shop/2.jpg"
+                src="{% static 'app/image/shop/2.jpg' %}"
                 alt=""
                 class="w-full h-48 object-cover"
               />
@@ -486,42 +501,44 @@
               </div>
             </a>
           </div>
-          <div
-            class="absolute inset-y-0 left-0 flex items-center"
-            id="leftBtn-3"
-          >
-            <div
-              class="scroll-arrow left-arrow bg-white p-2 rounded-full shadow-md cursor-pointer"
-              onclick="scrollCarousel('carousel-3', -300)"
-            >
-              <img
-                src="image/icon/left-arrow1.png"
-                alt=""
-                class="w-8 h-8 opacity-100"
-              />
-            </div>
-          </div>
-          <div
-            class="absolute inset-y-0 right-0 flex items-center"
-            id="rightBtn-3"
-          >
-            <div
-              class="scroll-arrow right-arrow bg-white p-2 rounded-full shadow-md cursor-pointer"
-              onclick="scrollCarousel('carousel-3', 300)"
-            >
-              <img
-                src="image/icon/right-arrow.png"
-                alt=""
-                class="w-8 h-8 opacity-100"
-              />
-            </div>
-          </div>
+          <div class="absolute inset-y-0 left-0 flex items-center" id="leftBtn-3">
+        <button
+          class="scroll-arrow left-arrow bg-white p-2 rounded-full shadow-md cursor-pointer"
+          onclick="scrollCarousel('carousel-3', -300)"
+          onkeydown="if (event.key === 'Enter' || event.key === ' ') { scrollCarousel('carousel-3', -300); event.preventDefault(); }"
+          aria-label="Scroll left"
+        >
+          <img
+            src="{% static 'app/image/icon/left-arrow1.png' %}"
+            alt="Scroll left"
+            class="w-8 h-8 opacity-100"
+          />
+        </button>
+      </div>
+      <div
+        class="absolute inset-y-0 right-0 flex items-center"
+        id="rightBtn-3"
+      >
+        <button
+          class="scroll-arrow right-arrow bg-white p-2 rounded-full shadow-md cursor-pointer"
+          onclick="scrollCarousel('carousel-3', 300)"
+          onkeydown="if (event.key === 'Enter' || event.key === ' ') { scrollCarousel('carousel-3', 300); event.preventDefault(); }"
+          aria-label="Scroll right"
+        >
+          <img
+            src="{% static 'app/image/icon/right-arrow.png' %}"
+            alt="Scroll right"
+            class="w-8 h-8 opacity-100"
+          />
+        </button>
+        </div>
+
         </div>
       </div>
     </section>
     <section class="py-12">
       <div class="container mx-auto px-4">
-        <!-- <h2 class="text-2xl font-bold mb-4">Recommended</h2>-->
+       
         <h2 class="text-3xl font-bold text-left text-gray-800 mb-8">
           Based on services
         </h2>
@@ -565,7 +582,7 @@
                 <div class="text-pink-600 text-5xl mb-4">
                   <img style="width: 100px; height: 100px" src="image/shop/2.jpg" alt="✂️" />
                 </div>
-                ';
+               
                 <h3 class="text-xl font-semibold">Hair services</h3>
                 <a href="https://www.youtube.com/watch?v=4U_AAGHzTok"
                   >Stylish haircuts by professional stylists.</a
@@ -579,7 +596,7 @@
                 <div class="text-pink-600 text-5xl mb-4">
                   <img style="width: 100px; height: 100px" src="image/shop/1.jpg" alt="✂️" />
                 </div>
-                ';
+                
                 <h3 class="text-xl font-semibold">Hair services</h3>
                 <a href="https://www.youtube.com/watch?v=4U_AAGHzTok"
                   >Stylish haircuts by professional stylists.</a
@@ -587,36 +604,35 @@
               </a>
             </div>
           </div>
-          <div
-            class="absolute inset-y-0 left-0 flex items-center"
-            id="leftBtn-4"
-          >
-            <div
-              class="scroll-arrow left-arrow bg-white p-2 rounded-full shadow-md cursor-pointer"
-              onclick="scrollCarousel('carousel-4', -300)"
+          <div class="absolute inset-y-0 left-0 flex items-center" id="leftBtn-4">
+            <button
+                class="scroll-arrow left-arrow bg-white p-2 rounded-full shadow-md cursor-pointer"
+                onclick="scrollCarousel('carousel-4', -300)"
+                onkeydown="if (event.key === 'Enter' || event.key === ' ') { scrollCarousel('carousel-4', -300); event.preventDefault(); }"
+                aria-label="Scroll left"
             >
-              <img
-                src="image/icon/left-arrow1.png"
-                alt=""
-                class="w-8 h-8 opacity-100"
-              />
-            </div>
-          </div>
-          <div
-            class="absolute inset-y-0 right-0 flex items-center"
-            id="rightBtn-4"
-          >
-            <div
-              class="scroll-arrow right-arrow bg-white p-2 rounded-full shadow-md cursor-pointer"
-              onclick="scrollCarousel('carousel-4', 300)"
+                <img
+                    src="{% static 'app/image/icon/left-arrow1.png' %}"
+                    alt="Scroll left"
+                    class="w-8 h-8 opacity-75 hover:opacity-100"
+                />
+            </button>
+        </div>
+        <div class="absolute inset-y-0 right-0 flex items-center" id="rightBtn-4">
+            <button
+                class="scroll-arrow right-arrow bg-white p-2 rounded-full shadow-md cursor-pointer"
+                onclick="scrollCarousel('carousel-4', 300)"
+                onkeydown="if (event.key === 'Enter' || event.key === ' ') { scrollCarousel('carousel-4', 300); event.preventDefault(); }"
+                aria-label="Scroll right"
             >
-              <img
-                src="image/icon/right-arrow.png"
-                alt=""
-                class="w-8 h-8 opacity-100"
-              />
-            </div>
-          </div>
+                <img
+                    src="{% static 'app/image/icon/right-arrow.png' %}"
+                    alt="Scroll right"
+                    class="w-8 h-8 opacity-75 hover:opacity-100"
+                />
+            </button>
+        </div>
+        
         </div>
       </div>
     </section>

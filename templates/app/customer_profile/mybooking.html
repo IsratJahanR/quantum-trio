@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+{% load static %}
+{% load static tailwind_tags %}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Bookings</title>
+    {% tailwind_css %}
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+
+<body class="bg-gray-100 pt-20">
+    {% include 'app/navbar.html' %}
+    
+    <section class="flex flex-col md:flex-row">
+        {% include 'app/customer_profile/sidebar.html' %}
+     
+        <div class="flex-1 p-6">
+            <h3 class="text-2xl font-bold text-pink-700 mb-6">My Bookings</h3>
+
+            <!-- Table displaying booking data -->
+            <div class="overflow-x-auto bg-white rounded-lg shadow-md">
+                <table class="min-w-full bg-white border border-gray-200 rounded-lg">
+                    <thead class="bg-pink-500 text-white">
+                        <tr>
+                            <th class="px-4 py-2 text-left">Booking Date</th>
+                            <th class="px-4 py-2 text-left">Shop Name</th>
+                            <th class="px-4 py-2 text-left">Item</th>
+                            <th class="px-4 py-2 text-left">Appointment Date</th>
+                            <th class="px-4 py-2 text-left">Time</th>
+                            <th class="px-4 py-2 text-left">Expert</th>
+                            <th class="px-4 py-2 text-left">Status</th>
+                            <th class="px-4 py-2 text-left">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-gray-700">
+                        <!-- Demo Booking 1 -->
+                        <tr class="border-t hover:bg-gray-100">
+                            <td class="px-4 py-2">2025-03-15</td>
+                            <td class="px-4 py-2">Salon A</td>
+                            <td class="px-4 py-2">Haircut</td>
+                            <td class="px-4 py-2">2025-03-16</td>
+                            <td class="px-4 py-2">3:00 PM</td>
+                            <td class="px-4 py-2">John Doe</td>
+                            <td class="px-4 py-2">Completed</td>
+                            <td class="px-4 py-2">
+                                <button onclick="rating(1)" class="text-blue-500 hover:text-blue-700">Rate</button>
+                            </td>
+                        </tr>
+
+                        <!-- Demo Booking 2 -->
+                        <tr class="border-t hover:bg-gray-100">
+                            <td class="px-4 py-2">2025-03-17</td>
+                            <td class="px-4 py-2">Salon B</td>
+                            <td class="px-4 py-2">Facial</td>
+                            <td class="px-4 py-2">2025-03-18</td>
+                            <td class="px-4 py-2">2:00 PM</td>
+                            <td class="px-4 py-2">Jane Smith</td>
+                            <td class="px-4 py-2">Pending</td>
+                            <td class="px-4 py-2">
+                                <button onclick="rating(2)" class="text-blue-500 hover:text-blue-700">Rate</button>
+                            </td>
+                        </tr>
+
+                        <!-- Demo Booking 3 -->
+                        <tr class="border-t hover:bg-gray-100">
+                            <td class="px-4 py-2">2025-03-20</td>
+                            <td class="px-4 py-2">Salon C</td>
+                            <td class="px-4 py-2">Massage</td>
+                            <td class="px-4 py-2">2025-03-21</td>
+                            <td class="px-4 py-2">5:00 PM</td>
+                            <td class="px-4 py-2">Michael Brown</td>
+                            <td class="px-4 py-2">Cancelled</td>
+                            <td class="px-4 py-2">
+                                <button onclick="rating(3)" class="text-blue-500 hover:text-blue-700">Rate</button>
+                            </td>
+                        </tr>
+
+                        <!-- Demo Booking 3 -->
+                        <tr class="border-t hover:bg-gray-100">
+                            <td class="px-4 py-2">2025-03-20</td>
+                            <td class="px-4 py-2">Salon D</td>
+                            <td class="px-4 py-2">Massage</td>
+                            <td class="px-4 py-2">2025-03-21</td>
+                            <td class="px-4 py-2">5:00 PM</td>
+                            <td class="px-4 py-2">Michael Brown</td>
+                            <td class="px-4 py-2">Cancelled</td>
+                            <td class="px-4 py-2">
+                                <button onclick="rating(3)" class="text-blue-500 hover:text-blue-700">Rate</button>
+                            </td>
+                        </tr>
+
+                        <!-- Demo Booking 3 -->
+                        <tr class="border-t hover:bg-gray-100">
+                            <td class="px-4 py-2">2025-03-20</td>
+                            <td class="px-4 py-2">Salon E</td>
+                            <td class="px-4 py-2">Massage</td>
+                            <td class="px-4 py-2">2025-03-21</td>
+                            <td class="px-4 py-2">5:00 PM</td>
+                            <td class="px-4 py-2">Michael Brown</td>
+                            <td class="px-4 py-2">Cancelled</td>
+                            <td class="px-4 py-2">
+                                <button onclick="rating(3)" class="text-blue-500 hover:text-blue-700">Rate</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- Overlay for Modal -->
+    <div id="overlay" class="hidden fixed inset-0 bg-black opacity-80 z-40"></div>
+
+    <!-- Rating Modal Structure -->
+    <div id="legal_notice" class="max-w-md mx-auto bg-white p-4 shadow-md z-50 fixed inset-0 m-auto hidden"
+        style="width: 50%; height: fit-content;">
+        <h2 class="text-xl font-semibold mb-4">Rate the Expert:</h2>
+        <form action="" method="POST" id="ratingForm">
+            <div class="mb-4">
+                <label for="to" class="block text-sm font-medium">To:</label>
+                <input type="text" id="to" name="To" required class="border border-gray-300 p-2 w-full" disabled>
+                <input type="hidden" id="To" name="to">
+            </div>
+            <!-- Star Rating System -->
+            <div class="flex mb-4">
+                <span class="star w-6 h-6 text-gray-400 cursor-pointer" data-value="1">&#9733;</span>
+                <span class="star w-6 h-6 text-gray-400 cursor-pointer" data-value="2">&#9733;</span>
+                <span class="star w-6 h-6 text-gray-400 cursor-pointer" data-value="3">&#9733;</span>
+                <span class="star w-6 h-6 text-gray-400 cursor-pointer" data-value="4">&#9733;</span>
+                <span class="star w-6 h-6 text-gray-400 cursor-pointer" data-value="5">&#9733;</span>
+            </div>
+            <!-- Hidden Rating Input -->
+            <input type="hidden" id="rating" name="rating" value="" required>
+
+            <div class="flex justify-between">
+                <button type="submit" class="bg-blue-500 text-white p-2 rounded" name="submit">Send</button>
+                <button type="button" class="bg-red-500 text-white p-2 rounded" id="cancelBtn">Cancel</button>
+            </div>
+        </form>
+    </div>
+    {% include 'app/footer.html' %}
+    <!-- JavaScript for Modal and Form Handling -->
+    <script>
+        // Function to show the rating form
+        function rating(booking_id) {
+            document.getElementById('to').value = 'booking ID: ' + booking_id; // Display booking ID in the disabled field
+            document.getElementById('To').value = booking_id; // Hidden field for actual booking ID
+            document.getElementById('legal_notice').style.display = 'block'; // Show modal
+            document.getElementById('overlay').classList.remove('hidden'); // Show overlay
+        }
+        // Function to handle the cancel button
+        function cancelEmail() {
+            if (confirm('Are you sure you want to cancel?')) {
+                // Clear the form
+                document.getElementById('to').value = '';
+                document.getElementById('To').value = '';
+                document.getElementById('rating').value = '';
+
+                // Hide modal and overlay
+                document.getElementById('legal_notice').style.display = 'none';
+                document.getElementById('overlay').classList.add('hidden');
+            }
+        }
+        // Function to handle clicks outside of the modal
+        window.onclick = function (event) {
+            var legalNoticeDiv = document.getElementById('legal_notice');
+            var overlayDiv = document.getElementById('overlay');
+            if (event.target == overlayDiv) {
+                legalNoticeDiv.style.display = 'none'; // Hide modal
+                overlayDiv.classList.add('hidden'); // Hide overlay
+            }
+        }
+        // Handling stars for rating
+        document.addEventListener('DOMContentLoaded', () => {
+            const stars = document.querySelectorAll('.star');
+            const ratingInput = document.getElementById('rating');
+            // Set up click event listener for each star
+            stars.forEach(star => {
+                star.addEventListener('click', () => {
+                    const selectedRating = parseInt(star.getAttribute('data-value'));
+
+                    // Update hidden input value
+                    ratingInput.value = selectedRating;
+
+                    // Reset all stars to gray
+                    stars.forEach(s => s.classList.remove('text-yellow-500'));
+
+                    // Highlight all stars up to the selected one
+                    for (let i = 0; i < selectedRating; i++) {
+                        stars[i].classList.add('text-yellow-500');
+                    }
+                });
+            });
+        });
+
+        // Cancel button listener
+        document.getElementById('cancelBtn').addEventListener('click', cancelEmail);
+
+        // Form submission handler
+        document.getElementById('ratingForm').addEventListener('submit', function (event) {
+            const rating = document.getElementById('rating').value;
+            if (rating === '') {
+                alert('Please select a rating before submitting.');
+                event.preventDefault(); // Stop form from submitting
+            }
+        });
+    </script>
+</body>
+</html>

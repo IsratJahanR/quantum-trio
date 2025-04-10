@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+{% load static %}
+{% load static tailwind_tags %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Account Setup</title>
+    <link rel="icon" type="image/x-icon" href="{% static 'app/image/favicon.ico' %}" />
+    {% tailwind_css %}
+    
+    <style>
+        .selected {
+            background-color: #be185d;
+            /* Orange background when selected */
+            color: white;
+            /* White text when selected */
+        }
+    </style>
+</head>
+
+<body class="bg-gray-100">
+    <div class="min-h-screen flex items-center justify-center p-5">
+        <div class="bg-white p-8 rounded-lg shadow-lg w-full max-w-md p-4">
+            <a href="step5">
+                <img src="{% static 'app/image/icon/left-arrow.png' %}" alt="" class="w-8 h-8">
+            </a>
+            <h2 class="text-xl font-bold text-center text-gray-700">Business Size</h2>
+            <p class="text-center text-gray-600 mb-8">How Many Members do You Have?</p>
+            <form action="step7" method="POST" id="memberForm">
+                {% csrf_token %}
+                <div class="mb-4">
+                    <input type="number" name="members" id="members" class="p-4 border rounded w-full text-center"
+                        min="1" placeholder="Enter the exact number of members" required>
+                </div>
+                <button type="submit"
+                    class="bg-pink-500 text-white p-2 w-full rounded-lg hover:bg-pink-700 transition duration-300">Continue</button>
+            </form>
+        </div>
+    </div>
+
+    {% comment %} <script>
+        document.getElementById('memberForm').addEventListener('submit', function (event) {
+            const members = document.getElementById('membersInput');
+            if (members.value === '') {
+                event.preventDefault();
+                alert('Please enter the number of members.');
+            }
+            if(members.value==0){
+                event.preventDefault();
+                alert('Please enter a number more than 0.');
+            }
+        });
+    </script> {% endcomment %}
+
+</body>
+
+</html>
